@@ -29,10 +29,14 @@ while True:
         # if the MAC is address is present at a given distance rotate the motor
         if device.addr == 'f5:af:3d:5b:0e:0d' and device.rssi >= -48:
             print("It's close")
-            servo1.ChangeDutyCycle(12)      # rotate motor 180 degrees
-            time.sleep(2)                   # wait two seconds
-        pir.wait_for_no_motion()            # detects for no motion
-        servo1.ChangeDutyCycle(0)           # rotate motor back to origin degree
+            servo1.start(2.5)               # start the motor with rotation
+            servo1.ChangeDutyCycle(2.5)     # supposed to rotate motor 180 degrees (maybe redundant code)
+            time.sleep(1)                   # rotates for 1 second
+            servo1.ChangeDutyCycle(0)       # stops the motor
+            time.sleep(5)                   # waits 5 seconds before executing rotation
+            servo1.ChangeDutyCycle(10.5)    # sets rotations the other way'
+            time.sleep(1)                   # rotates for 1 second
+            servo1.ChangeDutyCycle(0)       # stops rotation
 
     print("Motion stopped")     # print that the motion has stopped
 
